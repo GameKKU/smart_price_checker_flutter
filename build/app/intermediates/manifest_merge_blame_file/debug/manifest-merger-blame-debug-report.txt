@@ -33,7 +33,7 @@
 25-->[androidx.core:core:1.10.1] C:\Users\thana\.gradle\caches\transforms-3\9c9ab1a476c120097a79d748cec7161f\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 26        android:debuggable="true"
 27        android:icon="@mipmap/ic_launcher"
-28        android:label="smart_price_checker_flutter" >
+28        android:label="Barter Gang App" >
 29        <activity
 30            android:name="com.example.smart_price_checker_flutter.MainActivity"
 31            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

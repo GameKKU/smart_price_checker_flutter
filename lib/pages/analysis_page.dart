@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../services/api_service.dart';
@@ -17,11 +18,18 @@ class _AnalysisPageState extends State<AnalysisPage> {
   AnalysisResult? _analysisResult;
   bool _isLoading = true;
   String? _error;
+  Timer? _pollTimer;
 
   @override
   void initState() {
     super.initState();
     _loadAnalysis();
+  }
+
+  @override
+  void dispose() {
+    _pollTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> _loadAnalysis() async {
@@ -37,12 +45,47 @@ class _AnalysisPageState extends State<AnalysisPage> {
         _analysisResult = result;
         _isLoading = false;
       });
+
+      // If analysis is still processing, start polling
+      if (result.status == 'processing' || result.status == 'pending') {
+        _startPolling();
+      } else {
+        // Analysis is completed or failed, stop any existing polling
+        _pollTimer?.cancel();
+      }
     } catch (e) {
       setState(() {
         _error = e.toString();
         _isLoading = false;
       });
+      _pollTimer?.cancel();
     }
+  }
+
+  void _startPolling() {
+    // Cancel any existing timer
+    _pollTimer?.cancel();
+    
+    // Start polling every 2 seconds
+    _pollTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
+      try {
+        final result = await _apiService.getAnalysis(widget.analysisId);
+        
+        if (mounted) {
+          setState(() {
+            _analysisResult = result;
+          });
+        }
+        
+        // Stop polling if analysis is completed or failed
+        if (result.status == 'completed' || result.status == 'error' || result.status == 'failed') {
+          timer.cancel();
+        }
+      } catch (e) {
+        // Continue polling even if there's a temporary error
+        print('Polling error: $e');
+      }
+    });
   }
 
   @override
@@ -68,7 +111,34 @@ class _AnalysisPageState extends State<AnalysisPage> {
           children: [
             CircularProgressIndicator(),
             SizedBox(height: 16),
-            Text('Analyzing your images...'),
+            Text('Loading analysis...'),
+          ],
+        ),
+      );
+    }
+
+    // Show processing state with polling indicator
+    if (_analysisResult?.status == 'processing' || _analysisResult?.status == 'pending') {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 16),
+            Text(
+              'Analyzing your images...',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'This usually takes 2-5 seconds',
+              style: TextStyle(color: Colors.grey.shade600),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _loadAnalysis,
+              child: Text('Refresh'),
+            ),
           ],
         ),
       );
@@ -264,9 +334,9 @@ class _AnalysisPageState extends State<AnalysisPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.blue.shade50,
+                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.blue.shade200),
+                border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
               ),
               child: Column(
                 children: [
@@ -274,7 +344,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
                     'Suggested Price',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.blue.shade700,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -284,7 +354,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue.shade800,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -442,7 +512,7 @@ class _AnalysisPageState extends State<AnalysisPage> {
             icon: const Icon(Icons.history),
             label: const Text('View History'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue.shade600,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Colors.white,
             ),
           ),

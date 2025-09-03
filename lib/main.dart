@@ -2,28 +2,31 @@ import 'package:flutter/material.dart';
 import 'router/app_router.dart';
 
 void main() {
-  runApp(const SmartPriceCheckerApp());
+  runApp(const BarterGangApp());
 }
 
-class SmartPriceCheckerApp extends StatelessWidget {
-  const SmartPriceCheckerApp({super.key});
+class BarterGangApp extends StatelessWidget {
+  const BarterGangApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: '2nd Hand Price Checker',
+      title: 'Barter Gang App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: const Color(0xFFFFC000),
           brightness: Brightness.light,
+        ).copyWith(
+          background: const Color(0xFFFFC000).withOpacity(0.4),
+          surface: const Color(0xFFFFC000).withOpacity(0.3),
         ),
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           centerTitle: true,
           elevation: 0,
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xFFFFC000).withOpacity(0.6),
           foregroundColor: Colors.black87,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(

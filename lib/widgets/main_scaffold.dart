@@ -47,7 +47,7 @@ class MainScaffold extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         currentIndex: _getCurrentIndex(context),
         onTap: (index) => _onItemTapped(context, index),
-        selectedItemColor: Colors.blue.shade600,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey.shade600,
         backgroundColor: Colors.white,
         elevation: 8,

@@ -164,8 +164,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.blue.shade600,
-                    Colors.blue.shade800,
+                    Theme.of(context).colorScheme.primary,
+                    Theme.of(context).colorScheme.primary.withOpacity(0.8),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(16),
@@ -180,7 +180,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue.shade800,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
@@ -206,7 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: _showEditProfileDialog,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      foregroundColor: Colors.blue.shade800,
+                      foregroundColor: Theme.of(context).colorScheme.primary,
                     ),
                     child: const Text('Edit Profile'),
                   ),
@@ -315,7 +315,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: _buildActionCard(
                     icon: Icons.upload,
                     title: 'New Analysis',
-                    color: Colors.blue,
+                    color: Theme.of(context).colorScheme.primary,
                     onTap: () => context.go('/upload'),
                   ),
                 ),
@@ -364,12 +364,12 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.blue.shade50,
+            color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
             icon,
-            color: Colors.blue.shade600,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         title: Text(

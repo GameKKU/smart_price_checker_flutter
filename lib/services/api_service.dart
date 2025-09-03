@@ -6,7 +6,7 @@ import 'package:http_parser/http_parser.dart';
 import '../models/models.dart';
 
 class ApiService {
-  static const String _baseUrl = 'http://10.0.2.2:8000';
+  static const String _baseUrl = 'http://10.0.2.2:8001';
   late final Dio _dio;
 
   ApiService() {

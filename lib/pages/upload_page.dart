@@ -178,9 +178,9 @@ class _UploadPageState extends State<UploadPage> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.blue.shade200),
+                  border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,7 +197,7 @@ class _UploadPageState extends State<UploadPage> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Colors.blue.shade900,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ],
@@ -207,7 +207,7 @@ class _UploadPageState extends State<UploadPage> {
                       '• Take clear, well-lit photos\n• Show different angles of the item\n• Include any damage or wear\n• Maximum $maxImages images per analysis',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.blue.shade800,
+                        color: Theme.of(context).colorScheme.primary,
                         height: 1.5,
                       ),
                     ),
@@ -397,7 +397,7 @@ class _UploadPageState extends State<UploadPage> {
                   onPressed: _selectedImages.isNotEmpty && !_isUploading ? _analyzeImages : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _selectedImages.isNotEmpty && !_isUploading 
-                        ? Colors.blue.shade600 
+                        ? Theme.of(context).colorScheme.primary 
                         : Colors.grey.shade300,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),

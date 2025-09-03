@@ -113,8 +113,8 @@ class _HomePageState extends State<HomePage> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.blue.shade50,
-              Colors.indigo.shade100,
+              Theme.of(context).colorScheme.primaryContainer.withOpacity(0.2),
+              Theme.of(context).colorScheme.primaryContainer.withOpacity(0.4),
             ],
           ),
         ),
@@ -174,11 +174,11 @@ class _HomePageState extends State<HomePage> {
                                 width: 80,
                                 height: 80,
                                 decoration: BoxDecoration(
-                                  color: Colors.blue.shade600,
+                                  color: Theme.of(context).colorScheme.primary,
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.blue.shade200,
+                                      color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
                                       blurRadius: 12,
                                       offset: const Offset(0, 4),
                                     ),
@@ -297,12 +297,12 @@ class _HomePageState extends State<HomePage> {
                                               width: 48,
                                               height: 48,
                                               decoration: BoxDecoration(
-                                                color: Colors.blue.shade100,
+                                                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
                                                 borderRadius: BorderRadius.circular(8),
                                               ),
                                               child: Icon(
                                                 Icons.phone_android,
-                                                color: Colors.blue.shade600,
+                                                color: Theme.of(context).colorScheme.primary,
                                               ),
                                             ),
                                             const SizedBox(width: 12),
@@ -446,7 +446,7 @@ class _HomePageState extends State<HomePage> {
                                     width: 48,
                                     height: 48,
                                     decoration: BoxDecoration(
-                                      color: Colors.blue.shade100,
+                                      color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
                                       shape: BoxShape.circle,
                                     ),
                                     child: const Center(

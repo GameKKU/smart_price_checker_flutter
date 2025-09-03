@@ -518,13 +518,13 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "smart_price_checker_flutter",
+      "name": "barter_gang_app",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2025-09-02T16:43:08.467480Z",
+  "generated": "2025-09-03T16:55:21.598987Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }
